@@ -1,3 +1,4 @@
+
 .App {
 
 }
@@ -12,14 +13,22 @@
 
 .App-link {
 }
-
+#biggestDiv {
+  width: 100vw;
+  height: 100vh;
+}
 .sparkleBox {
   max-width: 900px;
   max-height: 900px;
+
 }
 .messageBoard {
+  background-image: url(./gameboy.png);
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
   border: 1px solid black;
-  background-color: peru;
   font-family: 'Chakra Petch', sans-serif;
   font-size: 40px;
   text-align: center;

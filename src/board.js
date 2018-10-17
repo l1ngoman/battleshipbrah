@@ -9,7 +9,7 @@ class Board extends Component {
       torpedoCount: 5, //parent, state variable; torpedoCount will decrement on every legal click
       clickCount: 0, //parent, state variable; will increment on every legal click; keeps track of turns
       boardState: [], //array containing all hits and misses; parent state variable
-      colors: ["#30b321", "red", "blue"], //green = unclicked, red = isHit() = true, blue = isHit() = false; parent, state; variable; pass to to child
+      colors: ["rgba(125,125,125,0)", "red", "blue"], //green = unclicked, red = isHit() = true, blue = isHit() = false; parent, state; variable; pass to to child
     }
   }
   render() {
@@ -19,7 +19,8 @@ class Board extends Component {
       )
     })
     return (
-      <div className="App">
+      <div id="biggestDiv">
+        <div className="App">
               <div className="sparkleBox">
               {boxes}
               </div>
@@ -36,6 +37,7 @@ class Board extends Component {
                     Torpedos remaining: {this.state.torpedoCount}
                   </div>
               </div>
+          </div>
       </div>
     );
   }
