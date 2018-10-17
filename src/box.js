@@ -11,20 +11,27 @@ class Box extends Component {
     }
   }
   render() {
-    let style = {backgroundColor: this.props.colors[this.state.colorIndex]}
+    let color = this.props.colors[this.state.colorIndex];
+    let style = {
+      backgroundColor: color,
+      border: "1px solid darkgreen",
+      float: "left",
+      width: "80px",
+      height: "80px",
+    }
     return (
-      <div className="App" style={style} onClick={this.handleClickBox}>
-        🖕
+      <div  style={style} onClick={this.handleClickBox}>
+        {this.props.id}
+        {this.props.boatString(this.props.id)}
       </div>
     );
   }
   handleClickBox  = () => {
     //runs on click of square
     //if isClicked is false, it calls the handleClickBoard function and changes color to red if hit or blue if miss
-    console.log(" is running");
     let {isClicked,colorIndex} = this.state
     if(!isClicked){
-      let bool = this.props.isHit();
+      let bool = this.props.isHit(this.props.id);
       if(bool){
         colorIndex = 1;
       }else{
@@ -32,9 +39,7 @@ class Box extends Component {
       }
       isClicked = true;
       this.props.handleClickBoard(bool, this.props.id);
-      this.setState({isClicked: isClicked})
-    }else{
-      console.log("isClicked is true");
+      this.setState({isClicked: isClicked,colorIndex: colorIndex})
     }
   }
 }
