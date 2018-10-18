@@ -11,7 +11,7 @@ class Board extends Component {
       torpedoCount: 50, //parent, state variable; torpedoCount will decrement on every legal click
       clickCount: 0, //parent, state variable; will increment on every legal click; keeps track of turns
       boardState: [], //array containing all hits and misses; parent state variable
-      colors: ["rgba(125,125,125,0)", "red", "darkgreen"], //green = unclicked, red = isHit() = true, blue = isHit() = false; parent, state; variable; pass to to child
+      colors: ["rgba(125,125,125,0)", "red", "white"], //green = unclicked, red = isHit() = true, blue = isHit() = false; parent, state; variable; pass to to child
       showBoatsEnabled: false,
       boxArray: [],
     }

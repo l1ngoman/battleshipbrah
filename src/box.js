@@ -16,13 +16,13 @@ class Box extends Component {
       backgroundColor: color,
       border: "1px solid darkgreen",
       float: "left",
-      width: "25.5px",
-      height: "23.5px",
+      width: "27.5px",
+      height: "25.5px",
     }
     return (
-      <div  style={style} onClick={this.handleClickBox}>
+      <button  style={style} onClick={this.handleClickBox}>
         {this.props.boatString(this.props.id)}
-      </div>
+      </button>
     );
   }
   handleClickBox  = () => {
