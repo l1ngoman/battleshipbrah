@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       index: [], //hold all the boxes; will need to loop out to create 100 and then map boxes into it;
       userName: '',//hold the name of the player
-      winArr: [5,8,33,7,2], //hold ship coordintes to find winner
+      winArr: [[5,6,7,8,9],[56,57,58,59],[23,33,43],[69,79,89,99],[12,22]] //hold ship coordintes to find winner
     }
   }
   render() {
@@ -34,10 +34,6 @@ class App extends Component {
     winArr.push(7)
     winArr.push(2)
     this.setState({winArr: winArr})
-  }
-  resetGame = () => {
-    console.log("Trying to reset game");
-    this.setState({userName: '',index: []})
   }
 }
 

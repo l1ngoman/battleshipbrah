@@ -1,11 +1,12 @@
 
 .App {
+  min-height: 130vh;
+  width: 100%;
   background-image: url(./gameboy.png);
-  background-position: center;
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
-  height: 130vh;
+
 }
 
 .App-logo {
@@ -21,8 +22,9 @@
 #biggestDiv {
   display: flex;
   flex-direction: row;
+
 }
-.sparkleBox {
+.gridBox {
   max-width:275px;
   max-height: 260px;
   padding-left: 86px;
@@ -33,12 +35,14 @@
   font-size: 40px;
   text-align: center;
   padding-top: 30px;
-  max-width: 750px;
+  max-width: 713.5px;
 }
 
-.button button {
+.button {
   font-family: 'Chakra Petch', sans-serif;
-  font-size: 40px;
+  font-size: 14px;
+  position: fixed;
+
 }
 #ruleTitle{
   font-size: 25px;
