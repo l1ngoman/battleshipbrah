@@ -32,9 +32,9 @@ class Board extends Component {
                     Torpedos remaining: {this.state.torpedoCount}
                   </div>
               </div>
-
+                <div id="spacer"></div>
               <div className="gridBox">
-              {this.state.boxArray}
+                {this.state.boxArray}
               </div>
               <div className="button">
                 <button onClick={this.showBoats}>SHOW BOATS</button>

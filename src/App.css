@@ -25,10 +25,15 @@
 
 }
 .gridBox {
+  background-image: url(./battleship_start4.jpg);
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom -30px right;
   max-width:275px;
   max-height: 260px;
-  padding-left: 86px;
-  padding-top: 26px;
+  margin-top: 25px;
+
 }
 .messageBoard {
   font-family: 'Chakra Petch', sans-serif;
@@ -50,4 +55,7 @@
 #ruleList{
   font-size: 15px;
   word-wrap: normal;
+}
+#spacer {
+  min-width: 85px;
 }
