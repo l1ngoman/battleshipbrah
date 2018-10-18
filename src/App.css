@@ -3,8 +3,9 @@
   background-image: url(./gameboy.png);
   background-position: center;
   background-repeat: no-repeat;
-  width: 100vw;
-  height: 120vh;
+  background-size: cover;
+  width: 100%;
+  height: 130vh;
 }
 
 .App-logo {
@@ -22,10 +23,10 @@
   flex-direction: row;
 }
 .sparkleBox {
-  max-width:265px;
+  max-width:275px;
   max-height: 260px;
-  padding-left: 85px;
-  padding-top: 13px;
+  padding-left: 86px;
+  padding-top: 26px;
 }
 .messageBoard {
   font-family: 'Chakra Petch', sans-serif;
