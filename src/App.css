@@ -1,6 +1,10 @@
 
 .App {
-
+  background-image: url(./gameboy.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 120vh;
 }
 
 .App-logo {
@@ -14,32 +18,23 @@
 .App-link {
 }
 #biggestDiv {
-  width: 100vw;
-  height: 100vh;
+  display: flex;
+  flex-direction: row;
 }
 .sparkleBox {
-  max-width: 900px;
-  max-height: 900px;
-
+  max-width:265px;
+  max-height: 260px;
+  padding-left: 85px;
+  padding-top: 13px;
 }
 .messageBoard {
-  background-image: url(./gameboy.png);
-  background-position: center;
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-  border: 1px solid black;
   font-family: 'Chakra Petch', sans-serif;
   font-size: 40px;
   text-align: center;
-  min-height: 818px;
+  padding-top: 30px;
+  max-width: 750px;
 }
-.button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
+
 .button button {
   font-family: 'Chakra Petch', sans-serif;
   font-size: 40px;

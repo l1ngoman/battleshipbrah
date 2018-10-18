@@ -16,12 +16,11 @@ class Box extends Component {
       backgroundColor: color,
       border: "1px solid darkgreen",
       float: "left",
-      width: "20px",
-      height: "20px",
+      width: "24.5px",
+      height: "22.5px",
     }
     return (
       <div  style={style} onClick={this.handleClickBox}>
-        {this.props.id}
         {this.props.boatString(this.props.id)}
       </div>
     );

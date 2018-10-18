@@ -21,10 +21,6 @@ class App extends Component {
       <main>
           <div className="App">
             <Board index={this.state.index} winArr={this.state.winArr} resetGame={this.resetGame}/>
-            <div className="button">
-              <button>START</button>
-              <button>SELECT</button>
-            </div>
           </div>
 
       </main>
