@@ -95,9 +95,9 @@ class Board extends Component {
     let {winArr} = this.state
     winArr.push(this.buildAShip(5))
     winArr.push(this.buildAShip(4))
-    // winArr.push(this.buildAShip(3))
-    // winArr.push(this.buildAShip(3))
-    // winArr.push(this.buildAShip(2))
+    winArr.push(this.buildAShip(3))
+    winArr.push(this.buildAShip(3))
+    winArr.push(this.buildAShip(2))
     this.setState({winArr: winArr})
   }
 
@@ -107,24 +107,27 @@ class Board extends Component {
     let handcuffs = 9 - shipLength
     let tens;
     let ones;
-    let newShipArr = [];
+    let newShipArr;
     //Determines veritcal or horizontal ship
     let axis = Math.floor(Math.random()*2)
     console.log("Axis: " + axis + "(0 for horizontal, 1 for vertical)");
-    if(axis === 0){ //horizontal axis
-      tens = (Math.floor(Math.random()*9)) * 10
-      ones = Math.floor(Math.random()*handcuffs)
-      for(let i=0;i<shipLength;i++){
-        newShipArr.push(tens+ones+i);
-      }
-    }else{// vertical axis
-      tens = (Math.floor(Math.random()*handcuffs)) * 10
-      ones = Math.floor(Math.random()*9)
-      for(let i=0;i<shipLength*10;i+=10){
-        newShipArr.push(tens+ones+i);
+    do{
+      newShipArr =[]
+        if(axis === 0){ //horizontal axis
+          tens = (Math.floor(Math.random()*9)) * 10
+          ones = Math.floor(Math.random()*handcuffs)
+          for(let i=0;i<shipLength;i++){
+            newShipArr.push(tens+ones+i);
+          }
+        }else{// vertical axis
+          tens = (Math.floor(Math.random()*handcuffs)) * 10
+          ones = Math.floor(Math.random()*9)
+          for(let i=0;i<shipLength*10;i+=10){
+            newShipArr.push(tens+ones+i);
+          }
+        }
         console.log(newShipArr);
-      }
-    }
+    }while(this.state.winArr.length<1? false: !this.isValidShip(newShipArr))
     return newShipArr
   }
   //returns, 'hit' or 'miss'
@@ -147,10 +150,11 @@ class Board extends Component {
     let c = 0;
     let {winArr} = this.state;
       for(let i=0;i<winArr.length;i++){
-        for(let j=0)
+        for(let j=0;j<winArr[i].length;j++){
           if(bS[winArr[i]] === "X"){
             c++
           }
+        }
       }
     if(c===winArr.length){
       bool2 = true;
@@ -162,10 +166,12 @@ class Board extends Component {
     let {torpedoCount,showBoatsEnabled,winArr} = this.state
     let emoji = ''
     for(let i=0;i<winArr.length;i++){
-        if(boxID===winArr[i] && (torpedoCount < 1) || showBoatsEnabled && boxID ===winArr[i]){
+      for(let j=0;j<winArr[i].length;j++){
+        if(boxID===winArr[i][j] && (torpedoCount < 1) || showBoatsEnabled && boxID ===winArr[i][j]){
           emoji = "🚢"
         }
       }
+    }
     return emoji;
   }
   //handle click for SHOW BOATS button
@@ -192,6 +198,25 @@ class Board extends Component {
     }else{
       console.log("surrender button disabled");
     }
+  }
+  //takes in a newShipArr and returns false if the ship has the same value as another ship in the winArr or true if not
+  //check if winArr contains a value in shipArr
+  isValidShip = (shipArr) => {
+    let {winArr} = this.state
+    let bool;
+    for (let i=0;i<winArr.length;i++) {
+      for(let j=0;j<shipArr.length;j++){
+        if(winArr[i].includes(shipArr[j])){
+          console.log(`${winArr[i]} does have a ****************************${shipArr[j]}.`);
+          return false;
+        }else{
+          console.log(`${winArr[i]} doesn't have ${shipArr[j]}.`);
+          bool = true;
+        }
+      }
+    }
+    console.log(bool);
+    return bool
   }
   //Random numbers can't be the same for different ships
   //Need to set a state that deactivates the start game button
