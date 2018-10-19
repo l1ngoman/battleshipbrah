@@ -46,7 +46,7 @@ class Board extends Component {
   }
 
   startGame = () => {
-    //this.props.positionShips();
+    this.props.positionShips();
     let boxes = this.props.index.map((box,i) => {
       return(
         <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.props.winArr} resetGame={this.props.resetGame} boatString={this.boatString}/>
