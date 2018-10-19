@@ -3,6 +3,8 @@ var winArr = []
 
 positionShips = () => {
   winArr.push(buildAShip(5))
+  winArr.push(buildAShip(4))
+
 }
 
 buildAShip = (shipLength) => {
@@ -36,3 +38,4 @@ buildAShip = (shipLength) => {
   return newShipArr
 }
 positionShips();
+console.log(winArr);

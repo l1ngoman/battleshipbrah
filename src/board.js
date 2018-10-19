@@ -51,7 +51,7 @@ class Board extends Component {
     let boxes;
     if(startButtonOn){
       this.positionShips();
-      console.log("We created ships at " + this.state.winArr);
+      console.log(this.state.winArr);
       boxes = index.map((box,i) => {
         return(
           <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
@@ -122,6 +122,7 @@ class Board extends Component {
       ones = Math.floor(Math.random()*9)
       for(let i=0;i<shipLength*10;i+=10){
         newShipArr.push(tens+ones+i);
+        console.log(newShipArr);
       }
     }
     return newShipArr
@@ -146,6 +147,7 @@ class Board extends Component {
     let c = 0;
     let {winArr} = this.state;
       for(let i=0;i<winArr.length;i++){
+        for(let j=0)
           if(bS[winArr[i]] === "X"){
             c++
           }
@@ -191,7 +193,7 @@ class Board extends Component {
       console.log("surrender button disabled");
     }
   }
-  //Random numbers on the fritz...
+  //Random numbers can't be the same for different ships
   //Need to set a state that deactivates the start game button
   //Need to print out status of ships, ie. sunk vs not sunk
   //Function to let user pick their ship positionShips
