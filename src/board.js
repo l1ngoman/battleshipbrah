@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Box from './box.js'
-import BattleStart from './battleship_start.jpg'
 
 class Board extends Component {
   constructor(props){
