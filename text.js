@@ -2,13 +2,7 @@ var winArr = []
 
 
 positionShips = () => {
-
   winArr.push(buildAShip(5))
-  winArr.push(buildAShip(4))
-  winArr.push(buildAShip(3))
-  winArr.push(buildAShip(3))
-  winArr.push(buildAShip(2))
-
 }
 
 buildAShip = (shipLength) => {
@@ -17,27 +11,28 @@ buildAShip = (shipLength) => {
   let handcuffs = 9 - shipLength
   let tens;
   let ones;
+  let newShipArr = [];
   //Determines veritcal or horizontal ship
   let axis = Math.floor(Math.random()*2)
-
+  console.log("Axis: "+axis);
   if(axis === 0){ //horizontal axis
-    tens = (Math.floor(Math.random()*9) * 10 //checked
+    tens = (Math.floor(Math.random()*9)) * 10
     ones = Math.floor(Math.random()*handcuffs)
-    return fillShip((tens+ones), shipLength, 1))
+    console.log("Tens (H): "+tens);
+    console.log("Ones (H): "+ones);
+    for(let i=0;i<shipLength;i++){
+      newShipArr.push(tens+ones+i);
+    }
   }else{// vertical axis
     tens = (Math.floor(Math.random()*handcuffs)) * 10
     ones = Math.floor(Math.random()*9)
-    return fillShip((tens + ones), shipLength, 10)
+    console.log("Tens (V): "+tens);
+    console.log("Ones (V): "+ones);
+    for(let i=0;i<shipLength*10;i+=10){
+      newShipArr.push(tens+ones+i);
+    }
   }
-
-}
-
-fillShip = (startBoat, length, inc) => {
-  let newShipArr = []
-  for(let i=0;i<length;i+=inc){
-    newShipArr.push(startBoat+i)
-  }
+  console.log(newShipArr);
   return newShipArr
 }
-console.log(positionShips())
-console.log(winArr);
+positionShips();

@@ -8,16 +8,16 @@ class Board extends Component {
     super(props)
 
     this.state = {
-      torpedoCount: 50, //parent, state variable; torpedoCount will decrement on every legal click
-      clickCount: 0, //parent, state variable; will increment on every legal click; keeps track of turns
+      index: Array(100).fill(''), //empty arr to map over to create boxes
+      boxArray: [], //array to hold all box components
       boardState: [], //array containing all hits and misses; parent state variable
-      colors: ["rgba(125,125,125,0)", "red", "white"], //green = unclicked, red = isHit() = true, blue = isHit() = false; parent, state; variable; pass to to child
-      showBoatsEnabled: false,
-      boxArray: [],
+      winArr: [], //hold ship coordintes to find winner
+      torpedoCount: 50, //decrements on every legal click
+      colors: ["rgba(125,125,125,0)", "red", "white"],
+      startButtonOn: true, //toggles the ability to click either the start or reset buttons
     }
   }
   render() {
-
     return (
       <div id="biggestDiv">
               <div className="messageBoard">
@@ -47,13 +47,26 @@ class Board extends Component {
   }
 
   startGame = () => {
-    this.props.positionShips();
-    let boxes = this.props.index.map((box,i) => {
-      return(
-        <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.props.winArr} resetGame={this.props.resetGame} boatString={this.boatString}/>
-      )
-    })
-    this.setState({boxArray:boxes})
+    let {startButtonOn,index} = this.state
+    let boxes;
+    if(startButtonOn){
+      this.positionShips();
+      console.log("We created ships at " + this.state.winArr);
+      boxes = index.map((box,i) => {
+        return(
+          <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
+        )
+      })
+      this.setState({boxArray: boxes,startButtonOn: false})
+    }else{
+      boxes = index.map((box,i) => {
+        return(
+          <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
+        )
+      })
+      console.log("start button disabled");
+      this.setState({boxArray: boxes})
+    }
   }
   handleClickBoard  = (bool,boxIndex) => {
     //loading X for hit or O for miss into boardState arr (to determine winner later) and incrementing clickCount and decrementing torpedoCount
@@ -66,7 +79,6 @@ class Board extends Component {
     }else{
       boardState[boxIndex] = "O";
     }
-
     //console.log(this.state.boardState); //logs current array of hits and misses
     if(this.isWinner(boardState)){
       alert("You won, bitch!")
@@ -79,9 +91,44 @@ class Board extends Component {
       this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
     }
   }
+  positionShips = () => {
+    let {winArr} = this.state
+    winArr.push(this.buildAShip(5))
+    winArr.push(this.buildAShip(4))
+    // winArr.push(this.buildAShip(3))
+    // winArr.push(this.buildAShip(3))
+    // winArr.push(this.buildAShip(2))
+    this.setState({winArr: winArr})
+  }
+
+  buildAShip = (shipLength) => {
+    //computer will pick random number
+    //the number will be the first number of the array
+    let handcuffs = 9 - shipLength
+    let tens;
+    let ones;
+    let newShipArr = [];
+    //Determines veritcal or horizontal ship
+    let axis = Math.floor(Math.random()*2)
+    console.log("Axis: " + axis + "(0 for horizontal, 1 for vertical)");
+    if(axis === 0){ //horizontal axis
+      tens = (Math.floor(Math.random()*9)) * 10
+      ones = Math.floor(Math.random()*handcuffs)
+      for(let i=0;i<shipLength;i++){
+        newShipArr.push(tens+ones+i);
+      }
+    }else{// vertical axis
+      tens = (Math.floor(Math.random()*handcuffs)) * 10
+      ones = Math.floor(Math.random()*9)
+      for(let i=0;i<shipLength*10;i+=10){
+        newShipArr.push(tens+ones+i);
+      }
+    }
+    return newShipArr
+  }
   //returns, 'hit' or 'miss'
   isHit = (boxIndex) => {
-    let {winArr} = this.props;
+    let {winArr} = this.state;
     let bool3 = false;
     for(let i=0;i<winArr.length;i++){
         if(winArr[i].includes(boxIndex)){
@@ -97,50 +144,52 @@ class Board extends Component {
   isWinner = (bS) => {
     let bool2 = false;
     let c = 0;
-    let {winArr} = this.props;
+    let {winArr} = this.state;
       for(let i=0;i<winArr.length;i++){
-        for(let j=0;j<winArr[i].length;j++){
-          if(bS[winArr[i][j]] === "X"){
+          if(bS[winArr[i]] === "X"){
             c++
           }
-        }
       }
-    if(c===17){
+    if(c===winArr.length){
       bool2 = true;
     }
     return bool2;
   }
   //returns boat emoji if game is won, no more Torpedos or if showBoatsEnabled is turned on (true)
   boatString = (boxID) => {
-    let {winArr} = this.props
-    let {torpedoCount,boardState,showBoatsEnabled} = this.state
+    let {torpedoCount,showBoatsEnabled,winArr} = this.state
     let emoji = ''
     for(let i=0;i<winArr.length;i++){
-      for(let j=0;j<winArr[i].length;j++){
-        if((boxID ===winArr[i][j]) && (torpedoCount < 1) || showBoatsEnabled && (boxID ===winArr[i][j])){
+        if(boxID===winArr[i] && (torpedoCount < 1) || showBoatsEnabled && boxID ===winArr[i]){
           emoji = "🚢"
         }
       }
-    }
     return emoji;
   }
   //handle click for SHOW BOATS button
   showBoats= () => {
-    let {showBoatsEnabled} = this.state;
-    if(showBoatsEnabled===false){
-      showBoatsEnabled = true;
+    if(!this.state.startButtonOn && this.state.showBoatsEnabled){
+        let {showBoatsEnabled} = this.state;
+        showBoatsEnabled?showBoatsEnabled=false:showBoatsEnabled= true;
+        console.log("showBoatsEnabled changed from "+this.state.showBoatsEnabled+" to "+showBoatsEnabled);
+        return showBoatsEnabled;
     }else{
-      showBoatsEnabled = false;
+      console.log("showBoats button disabled");
     }
-    console.log(this.state.showBoatsEnabled);
-    this.startGame();
-    this.setState({showBoatsEnabled: showBoatsEnabled})
   }
   resetGame = () => {
-    console.log("Trying to reset game");
+    if(!this.state.startButtonOn){
+      console.log("Trying to reset game");
+    }else {
+      console.log("resetGame button disabled");
+    }
   }
   giveUp = () => {
-    console.log("Trying to surrender");
+    if(!this.state.startButtonOn){
+      console.log("Trying to surrender");
+    }else{
+      console.log("surrender button disabled");
+    }
   }
   //Random numbers on the fritz...
   //Need to set a state that deactivates the start game button
