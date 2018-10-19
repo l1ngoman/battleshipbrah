@@ -15,6 +15,7 @@ class Board extends Component {
       torpedoCount: 50, //decrements on every legal click
       colors: ["rgba(125,125,125,0)", "red", "white"],
       startButtonOn: true, //toggles the ability to click either the start or reset buttons
+      showBoatsEnabled: false, //toggles the ability to see where enemy ships are
     }
   }
   render() {
@@ -52,20 +53,10 @@ class Board extends Component {
     if(startButtonOn){
       this.positionShips();
       console.log(this.state.winArr);
-      boxes = index.map((box,i) => {
-        return(
-          <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
-        )
-      })
+      boxes = this.renderBoxes();
       this.setState({boxArray: boxes,startButtonOn: false})
     }else{
-      boxes = index.map((box,i) => {
-        return(
-          <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
-        )
-      })
       console.log("start button disabled");
-      this.setState({boxArray: boxes})
     }
   }
   handleClickBoard  = (bool,boxIndex) => {
@@ -165,12 +156,14 @@ class Board extends Component {
   }
   //returns boat emoji if game is won, no more Torpedos or if showBoatsEnabled is turned on (true)
   boatString = (boxID) => {
-    let {torpedoCount,showBoatsEnabled,winArr} = this.state
+    let {torpedoCount,winArr} = this.state
     let emoji = ''
     for(let i=0;i<winArr.length;i++){
       for(let j=0;j<winArr[i].length;j++){
-        if(boxID===winArr[i][j] && (torpedoCount < 1) || showBoatsEnabled && boxID ===winArr[i][j]){
+        if(boxID===winArr[i][j] && this.state.showBoatsEnabled){
+          console.log("WinArr: "+winArr[i][j]);
           emoji = "🚢"
+          break;
         }
       }
     }
@@ -178,11 +171,16 @@ class Board extends Component {
   }
   //handle click for SHOW BOATS button
   showBoats= () => {
-    if(!this.state.startButtonOn && this.state.showBoatsEnabled){
-        let {showBoatsEnabled} = this.state;
-        showBoatsEnabled?showBoatsEnabled=false:showBoatsEnabled= true;
+    let {showBoatsEnabled,winArr} = this.state;
+    if(!this.state.startButtonOn){
+        if(showBoatsEnabled===true){
+          showBoatsEnabled=false;
+        }else{
+          showBoatsEnabled=true;
+        }
         console.log("showBoatsEnabled changed from "+this.state.showBoatsEnabled+" to "+showBoatsEnabled);
-        return showBoatsEnabled;
+        let boxes = this.renderBoxes()
+        this.setState({showBoatsEnabled:showBoatsEnabled,boxArray:boxes});
     }else{
       console.log("showBoats button disabled");
     }
@@ -219,6 +217,14 @@ class Board extends Component {
     }
     console.log(bool);
     return bool
+  }
+  renderBoxes = () => {
+    let boxes = this.state.index.map((box,i) => {
+      return(
+        <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
+      )
+    })
+    return boxes
   }
   //Random numbers can't be the same for different ships
   //Need to set a state that deactivates the start game button

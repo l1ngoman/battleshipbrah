@@ -8,7 +8,7 @@ class Box extends Component {
     this.state = {
       isClicked: false, //child, state variable
       colorIndex: 0,
-      showBoatsEnabled: false, //toggles the ability to see where enemy ships are
+
     }
   }
   render() {
@@ -40,7 +40,7 @@ class Box extends Component {
       isClicked = true;
 
       this.props.handleClickBoard(bool, this.props.id);
-      this.setState({isClicked: isClicked,colorIndex: colorIndex,showBoatsEnabled: this.props.showBoats()})
+      this.setState({isClicked: isClicked,colorIndex: colorIndex})
     }
   }
 }
