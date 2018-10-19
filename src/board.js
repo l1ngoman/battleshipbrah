@@ -151,12 +151,14 @@ class Board extends Component {
     let {winArr} = this.state;
       for(let i=0;i<winArr.length;i++){
         for(let j=0;j<winArr[i].length;j++){
-          if(bS[winArr[i]] === "X"){
+          if(bS[winArr[i][j]] === "X"){
             c++
           }
         }
       }
-    if(c===winArr.length){
+      console.log(bS);
+      console.log(c);
+    if(c===17){
       bool2 = true;
     }
     return bool2;
