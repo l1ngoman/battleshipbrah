@@ -7,33 +7,66 @@ class App extends Component {
     super(props)
 
     this.state = {
-      index: [], //hold all the boxes; will need to loop out to create 100 and then map boxes into it;
+      index: Array(100).fill(''), //hold all the boxes; will need to loop out to create 100 and then map boxes into it;
       userName: '',//hold the name of the player
-      winArr: [[5,6,7,8,9],[56,57,58,59],[23,33,43],[69,79,89,99],[12,22]] //hold ship coordintes to find winner
+      winArr: [] //hold ship coordintes to find winner
     }
   }
   render() {
-    let {index} = this.state
-    for(let i=0;i<100;i++){
-      index.push('');
-    }
     return (
       <main>
           <div className="App">
-            <Board index={this.state.index} winArr={this.state.winArr} resetGame={this.resetGame}/>
+            <Board index={this.state.index} winArr={this.state.winArr} positionShips={this.positionShips} />
+            {console.log(this.state.winArr)}
           </div>
-
       </main>
     );
   }
   positionShips = () => {
     let {winArr} = this.state
-    winArr.push(5)
-    winArr.push(8)
-    winArr.push(33)
-    winArr.push(7)
-    winArr.push(2)
+    winArr.push(this.buildAShip(5))
+    // winArr.push(this.buildAShip(4))
+    // winArr.push(this.buildAShip(3))
+    // winArr.push(this.buildAShip(3))
+    // winArr.push(this.buildAShip(2))
+    console.log(this.state.winArr);
     this.setState({winArr: winArr})
+  }
+
+  buildAShip = (shipLength) => {
+    //computer will pick random number
+    //the number will be the first number of the array
+    let handcuffs = 9 - shipLength
+    let tens;
+    let ones;
+    //Determines veritcal or horizontal ship
+    let axis = Math.floor(Math.random()*2)
+    console.log("Axis: " + axis + "(0 for horizontal, 1 for vertical)");
+    if(axis === 0){ //horizontal axis
+      tens = (Math.floor(Math.random()*9)) * 10
+      ones = Math.floor(Math.random()*handcuffs)
+      return this.makeHorShip(tens+ones, shipLength)
+    }else{// vertical axis
+      tens = (Math.floor(Math.random()*handcuffs)) * 10
+      ones = Math.floor(Math.random()*9)
+      return this.makeVertShip(tens+ones, shipLength)
+    }
+
+  }
+
+  makeHorShip = (startBoat, length) => {
+    let newShipArr = [];
+    for(let i=0;i<length;i++){
+      newShipArr.push(startBoat+i);
+    }
+    return newShipArr
+  }
+  makeVertShip = (startBoat, length) => {
+    let newShipArr = [];
+    for(let i=0;i<length;i+=10){
+      newShipArr.push(startBoat+i);
+    }
+    return newShipArr
   }
 }
 

@@ -39,6 +39,7 @@ class Board extends Component {
               <div className="button">
                 <button onClick={this.showBoats}>SHOW BOATS</button>
                 <button onClick={this.startGame}>START</button>
+                <button onClick={this.giveUp}>SURRENDER</button>
                 <button onClick={this.resetGame}>RESET</button>
               </div>
       </div>
@@ -46,6 +47,7 @@ class Board extends Component {
   }
 
   startGame = () => {
+    this.props.positionShips();
     let boxes = this.props.index.map((box,i) => {
       return(
         <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.props.winArr} resetGame={this.props.resetGame} boatString={this.boatString}/>
@@ -72,7 +74,7 @@ class Board extends Component {
     }else if(torpedoCount<=0){
       alert("You ran out of torpedos, bitch!")
       this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
-      this.props.resetGame();
+      this.resetGame();
     }else{
       this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
     }
@@ -97,7 +99,7 @@ class Board extends Component {
     let c = 0;
     let {winArr} = this.props;
       for(let i=0;i<winArr.length;i++){
-        for(let j=0;j<5;j++){
+        for(let j=0;j<winArr[i].length;j++){
           if(bS[winArr[i][j]] === "X"){
             c++
           }
@@ -135,15 +137,16 @@ class Board extends Component {
     this.setState({showBoatsEnabled: showBoatsEnabled})
   }
   resetGame = () => {
-    this.setState({
-      torpedoCount: 50,
-      clickCount: 0,
-      boardState: [],
-      showBoatsEnabled: false,
-      boxArray: [],
-    })
-    this.startGame();
+    console.log("Trying to reset game");
   }
+  giveUp = () => {
+    console.log("Trying to surrender");
+  }
+  //Random numbers on the fritz...
+  //Need to set a state that deactivates the start game button
+  //Need to print out status of ships, ie. sunk vs not sunk
+  //Function to let user pick their ship positionShips
+  //Function for computer to play against user
 }
 
 export default Board;
