@@ -17,8 +17,8 @@ class Box extends Component {
       backgroundColor: color,
       border: "1px solid darkgreen",
       float: "left",
-      width: "27.5px",
-      height: "25.5px",
+      width: "29.5px",
+      height: "27px",
     }
     return (
       <button  style={style} onClick={this.handleClickBox}>

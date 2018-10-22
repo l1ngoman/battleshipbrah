@@ -21,7 +21,7 @@ class Board extends Component {
     return (
       <div id="biggestDiv">
               <div className="messageBoard">
-                You is playin da battleships!
+                Battleship!
                   <div id="ruleTitle">
                     Here are z rulez:
                       <p id="ruleList">
@@ -29,12 +29,13 @@ class Board extends Component {
                       </p>
                   </div>
                   <div id="stats">
-                    Torpedos remaining: {this.state.torpedoCount}
+                    Torpedos: {this.state.torpedoCount}
                   </div>
-              </div>
-                <div id="spacer"></div>
-              <div className="gridBox">
-                {this.state.boxArray}
+              </div>    
+              <div className="gameboyTop">
+                  <div className="gridBox">
+                    {this.state.boxArray}
+                  </div>
               </div>
               <div className="button">
                 <button onClick={this.showBoats}>SHOW BOATS</button>
