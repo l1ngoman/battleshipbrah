@@ -34,8 +34,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom -38px right;
+  border: 5px solid black;
   max-width:380px;
   max-height: 348px;
+  min-width: 380px;
   margin-top: 37px;
   margin-left: 160px;
 

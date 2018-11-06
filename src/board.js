@@ -15,6 +15,18 @@ class Board extends Component {
       colors: ["rgba(125,125,125,0)", "red", "white"],
       startButtonOn: true, //toggles the ability to click either the start or reset buttons
       showBoatsEnabled: false, //toggles the ability to see where enemy ships are
+      gridBoxStyle: {
+        backgroundImage: `url(${this.props.img})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "bottom -38px right",
+        border: "5px solid black",
+        maxWidth: "380px",
+        maxHeight: "348px",
+        minWidth: "380px",
+        marginTop: "37px",
+        marginLeft: "160px"
+      }
     }
   }
   render() {
@@ -33,7 +45,7 @@ class Board extends Component {
                   </div>
               </div>
               <div className="gameboy">
-                  <div className="gridBox">
+                  <div className="gridBox" style={this.state.gridBoxStyle}>
                     {this.state.boxArray}
                   </div>
               </div>
@@ -48,6 +60,7 @@ class Board extends Component {
   }
 
   startGame = () => {
+    this.props.handleStart(1);
     let {startButtonOn,index} = this.state
     let boxes;
     if(startButtonOn){
