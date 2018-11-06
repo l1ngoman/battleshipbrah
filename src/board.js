@@ -31,8 +31,8 @@ class Board extends Component {
                   <div id="stats">
                     Torpedos: {this.state.torpedoCount}
                   </div>
-              </div>    
-              <div className="gameboyTop">
+              </div>
+              <div className="gameboy">
                   <div className="gridBox">
                     {this.state.boxArray}
                   </div>
