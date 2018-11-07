@@ -8,20 +8,31 @@ class App extends Component {
     this.state={
       bkgd:
       [{
-        image: './images/gameboyStart.bmp'
+        image: 'images/gameboyStart.bmp'
       },
       {
-        image: './images/battleship.jpg'
+        image: 'images/battleship.jpg'
       }],
       index: 0
     }
   }
 
   render() {
+    let style = {
+      backgroundImage: `url(${this.state.bkgd[this.state.index].image})`,
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      border: "5px solid black",
+      maxWidth: "380px",
+      maxHeight: "350px",
+      minWidth: "382px",
+      marginTop: "31px",
+      marginLeft: "154px"
+    }
     return (
       <main>
           <div className="App">
-            <Board img={this.state.bkgd[this.state.index].image} handleStart={this.handleStart}/>
+            <Board gridBoxStyle={style} handleStart={this.handleStart}/>
           </div>
       </main>
     );

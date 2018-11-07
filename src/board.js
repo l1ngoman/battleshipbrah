@@ -15,18 +15,6 @@ class Board extends Component {
       colors: ["rgba(125,125,125,0)", "red", "white"],
       startButtonOn: true, //toggles the ability to click either the start or reset buttons
       showBoatsEnabled: false, //toggles the ability to see where enemy ships are
-      gridBoxStyle: {
-        backgroundImage: `url(${this.props.img})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "bottom -38px right",
-        border: "5px solid black",
-        maxWidth: "380px",
-        maxHeight: "348px",
-        minWidth: "380px",
-        marginTop: "37px",
-        marginLeft: "160px"
-      }
     }
   }
   render() {
@@ -45,15 +33,17 @@ class Board extends Component {
                   </div>
               </div>
               <div className="gameboy">
-                  <div className="gridBox" style={this.state.gridBoxStyle}>
+                  <div className="gridBox" style={this.props.gridBoxStyle}>
                     {this.state.boxArray}
                   </div>
               </div>
               <div className="button">
-                <button onClick={this.showBoats}>SHOW BOATS</button>
-                <button onClick={this.startGame}>START</button>
-                <button onClick={this.giveUp}>SURRENDER</button>
-                <button onClick={this.resetGame}>RESET</button>
+                <div>
+                  <button onClick={this.showBoats}>SHOW BOATS</button>
+                  <button onClick={this.startGame}>START</button>
+                  <button onClick={this.giveUp}>SURRENDER</button>
+                  <button onClick={this.resetGame}>RESET</button>
+                </div>
               </div>
       </div>
     );
