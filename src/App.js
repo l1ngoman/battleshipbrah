@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import './App.css';
 import Board from './board.js';
 
+
 class App extends Component {
   constructor(props){
     super(props)
     this.state={
       bkgd:
       [{
-        image: 'images/gameboyStart.bmp'
+        image: './images/gameboyStart.bmp'
       },
       {
-        image: 'images/battleship.jpg'
+        image: './images/battleship.jpg'
       }],
       index: 0
     }

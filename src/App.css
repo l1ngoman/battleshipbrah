@@ -18,7 +18,7 @@
 #biggestDiv {
   display: flex;
   flex-direction: row;
-  background-image: url(./images/topGameBoy.png);
+  background-image: url(/public/images/topGameBoy.png);
   background-repeat: no-repeat;
   background-color: rgba(217,217,217,.89);
 
@@ -30,7 +30,7 @@
   min-width: 600px;
 }
 .gridBox {
-  background-image: url(./images/battleship.jpg);
+  background-image: url(/public/images/battleship.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   max-width:380px;
