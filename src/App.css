@@ -22,8 +22,7 @@
 #top {
   display: flex;
   flex-direction: row;
-  background-image: url(/images/newgbBackground.png);
-  background-size: fixed;
+  background-image: url(/public/images/topGameBoy.png);
   background-repeat: no-repeat;
   background-color: rgba(217,217,217,.89);
 }
