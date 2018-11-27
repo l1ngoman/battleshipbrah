@@ -15,30 +15,29 @@
 
 .App-link {
 }
-#biggestDiv {
+#page {
+  display: flex;
+  flex-direction: column;
+}
+#top {
   display: flex;
   flex-direction: row;
   background-image: url(/public/images/topGameBoy.png);
   background-repeat: no-repeat;
   background-color: rgba(217,217,217,.89);
-
+}
+#bottom {
+  background-color: rgba(217,217,217,.89);
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 14px;
 }
 .gameboy {
   display: flex;
   flex-direction:  row;
   height: 100vh;
-  min-width: 600px;
+  min-width: 800px;
 }
-.gridBox {
-  background-image: url(/public/images/battleship.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  max-width:380px;
-  max-height: 348px;
-  min-width: 380px;
 
-
-}
 .messageBoard {
   font-family: 'Chakra Petch', sans-serif;
   font-size: 40px;
@@ -49,12 +48,6 @@
   height: 100vh;
 }
 
-.button {
-  font-family: 'Chakra Petch', sans-serif;
-  font-size: 14px;
-  position: fixed;
-
-}
 #ruleTitle{
   font-size: 25px;
 }

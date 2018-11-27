@@ -22,33 +22,37 @@ class Board extends Component {
   }
   render() {
     return (
-      <div id="biggestDiv">
-              <div className="messageBoard">
-                Battleship!
-                  <div id="ruleTitle">
-                    Here are z rulez:
-                      <p id="ruleList">
-                        The object of the game is to sink all of your opponent{"\'"}s battleships. There are five ships to sink, but move wisely because you only have {this.state.torpedoCount} torpedos! Good luck, and don{"\'"}t fuck it up!!!
-                      </p>
-                  </div>
-                  <div id="stats">
-                    Torpedos: {this.state.torpedoCount}
-                  </div>
-              </div>
-              <div className="gameboy">
-                  <div className="gridBox" style={this.props.gridBoxStyle}>
-                    {this.state.boxArray}
-                  </div>
-              </div>
-              <div className="button">
-                <div>
-                  <button onClick={this.showBoats}>SHOW BOATS</button>
-                  <button onClick={this.startGame}>START</button>
-                  <button onClick={this.giveUp}>SURRENDER</button>
-                  <button onClick={this.resetGame}>RESET</button>
+      <div id="page">
+        <div id="top">
+                <div className="messageBoard">
+                  Battleship!
+                    <div id="ruleTitle">
+                      Here are z rulez:
+                        <p id="ruleList">
+                          The object of the game is to sink all of your opponent{"\'"}s battleships. There are five ships to sink, but move wisely because you only have {this.state.torpedoCount} torpedos! Good luck, and don{"\'"}t fuck it up!!!
+                        </p>
+                    </div>
+                    <div id="stats">
+                      Torpedos: {this.state.torpedoCount}
+                    </div>
                 </div>
-              </div>
-      </div>
+                <div className="gameboy">
+                    <div className="gridBox" style={this.props.gridBoxStyle}>
+                      {this.state.boxArray}
+                    </div>
+                </div>
+          </div>
+          <div id="bottom">
+                <div className="button">
+                  <div>
+                    <button onClick={this.showBoats}>SHOW BOATS</button>
+                    <button onClick={this.startGame}>START</button>
+                    <button onClick={this.giveUp}>SURRENDER</button>
+                    <button onClick={this.resetGame}>RESET</button>
+                  </div>
+                </div>
+          </div>
+        </div>
     );
   }
 
