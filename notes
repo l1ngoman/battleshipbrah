@@ -1,0 +1,4 @@
+each game piece need:
+  1. name
+  2. array of positions
+  3. cheat color (to appear when showBoatsEnabled)

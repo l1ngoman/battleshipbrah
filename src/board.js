@@ -6,17 +6,21 @@ import Boat from './Boat.js'
 class Board extends Component {
   constructor(props){
     super(props)
-
     this.state = {
       index: Array(100).fill(''), //empty arr to map over to create boxes
       boxArray: [], //array to hold all box components
-      boardState: [], //array containing all hits and misses; parent state variable
-      winArr: [], //hold ship coordintes to find winner
       torpedoCount: 50, //decrements on every legal click
-      colors: ["rgba(125,125,125,0)", "red", "white"],
       startButtonOn: true, //toggles the ability to click either the start or reset buttons
       showBoatsEnabled: false, //toggles the ability to see where enemy ships are
-      boxIsClicked: false,
+      boardState: [], //array containing all hits and misses; parent state variable
+      boats: [], //holds all game pieces (boat objects)
+      winArr: [], //hold ship coordintes to find winner
+      box: {
+        id: '',
+        isShip: false,
+        isClicked: false,
+        color: ["rgba(125,125,125,0)", "red", "white"],
+      }
     }
 
   }
@@ -52,32 +56,49 @@ class Board extends Component {
     );
   }
 
-  handleClickBoard = (bool,boxIndex) => {
+  handleClickBoard = (boxIndex) => {
     //loading X for hit or O for miss into boardState arr (to determine winner later) and incrementing clickCount and decrementing torpedoCount
-    console.log("handleClickBoard is running");
     let {boardState,clickCount,torpedoCount} = this.state
     clickCount++
     torpedoCount--
-    bool ? boardState[boxIndex] = "X" : boardState[boxIndex] = "O";
-    //console.log(this.state.boardState); //logs current array of hits and misses
+    this.isHit(boxIndex) ? boardState[boxIndex] = "X" : boardState[boxIndex] = "O";
+    //check for winner and handle accordingly
     if(this.isWinner(boardState)){
       alert("You won, bitch!")
-      this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
+      this.setState({boardState,clickCount,torpedoCount})
     }else if(torpedoCount<=0){
       alert("You ran out of torpedos, bitch!")
-      this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
-      this.resetGame();
-    }else{
-      this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
+      this.setState({boardState,clickCount,torpedoCount})
+    }else {
+      this.setState({boardState,clickCount,torpedoCount})
     }
   }
 
-  renderBoxes = () => {
-    let boxes = this.state.index.map((box,i) => {
+  renderBoxes = (shipCoordinates) => {
+    console.log(shipCoordinates);
+    let { index, box } = this.state;
+    let bool;
+    let emoji;
+    console.log(box.isShip);
+    let boxes = index.map((el,i) => {
+      if(shipCoordinates[0].includes(i) ||
+         shipCoordinates[1].includes(i) ||
+         shipCoordinates[2].includes(i) ||
+         shipCoordinates[3].includes(i) ||
+         shipCoordinates[4].includes(i))
+      {
+        bool = true;
+        emoji = '🚢'
+      }else{
+        bool = false;
+        emoji ='';
+      }
       return(
-        <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
+        <Box id={i} emoji={emoji} isShip={bool} handleClickBoard={this.handleClickBoard} />
       )
     })
+    console.log(shipCoordinates);
+    console.log(box);
     return boxes
   }
 
@@ -149,12 +170,12 @@ class Board extends Component {
   startGame = () => {
     this.props.handleStart(1);
     let boats = new Boat;
-    let {startButtonOn,index} = this.state
+    let { startButtonOn,index, winArr } = this.state
+    winArr = boats.positionShips();
     let boxes;
     if(startButtonOn){
-      console.log(this.state.winArr);
-      boxes = this.renderBoxes();
-      this.setState({winArr: boats.positionShips(),boxArray: boxes,startButtonOn: false})
+      boxes = this.renderBoxes(winArr);
+      this.setState({winArr: winArr,boxArray: boxes,startButtonOn: false})
     }else{
       alert("The game has already started.");
     }
@@ -178,14 +199,6 @@ class Board extends Component {
   giveUp = () => {
     !this.state.startButtonOn ? console.log("Trying to surrender") : console.log("surrender button disabled");
   }
-
-
-
-  //Random numbers can't be the same for different ships
-  //Need to set a state that deactivates the start game button
-  //Need to print out status of ships, ie. sunk vs not sunk
-
-  //Function for computer to play against user
 }
 
 export default Board;

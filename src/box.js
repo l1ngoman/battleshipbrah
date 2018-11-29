@@ -6,15 +6,14 @@ class Box extends Component {
     super(props)
 
     this.state = {
-      isClicked: false, //child, state variable
-      colorIndex: 0,
-
-    }
+      color: ["rgba(125,125,125,0)", "red", "white"],
+      }
   }
   render() {
-    let color = this.props.colors[this.state.colorIndex];
+    let index;
+    this.props.isShip ? index = 1 : index = 2
     let style = {
-      backgroundColor: color,
+      backgroundColor: this.state.color[index],
       border: "1px solid darkgreen",
       float: "left",
       width: "38px",
@@ -22,26 +21,21 @@ class Box extends Component {
     }
     return (
       <button  style={style} onClick={this.handleClickBox}>
-        {this.props.boatString(this.props.id)}
+        {this.props.emoji}
       </button>
     );
   }
+
+
   handleClickBox  = () => {
     //runs on click of square
     //if isClicked is false, it calls the handleClickBoard function and changes color to red if hit or blue if miss
-    let {isClicked,colorIndex} = this.state
-    if(!isClicked){
-      let bool = this.props.isHit(this.props.id);
-      if(bool){
-        colorIndex = 1;
-      }else{
-        colorIndex = 2;
-      }
-      isClicked = true;
-
-      this.props.handleClickBoard(bool, this.props.id);
-      this.setState({isClicked: isClicked,colorIndex: colorIndex})
+    if(this.props.isShip){
+      console.log(`I'm a ship! (${this.props.id})`);
     }
+    let {isClicked,colorIndex} = this.state;
+      this.props.handleClickBoard(this.props.id);
+      this.setState({isClicked: isClicked,colorIndex: colorIndex})
   }
 }
 
