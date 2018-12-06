@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Box from './box.js'
+import BSBox from './BSBox.js'
 import Boat from './Boat.js'
 
-class Board extends Component {
+class Battleship extends Component {
   constructor(props){
     super(props)
 
@@ -16,7 +16,7 @@ class Board extends Component {
       colors: ["rgba(125,125,125,0)", "red", "white"],
       startButtonOn: true, //toggles the ability to click either the start or reset buttons
       showBoatsEnabled: false, //toggles the ability to see where enemy ships are
-      boxIsClicked: false,
+      boxIsClicked: false
     }
 
   }
@@ -79,7 +79,7 @@ class Board extends Component {
   renderBoxes = () => {
     let boxes = this.state.index.map((box,i) => {
       return(
-        <Box id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
+        <BSBox id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
       )
     })
     return boxes
@@ -192,4 +192,4 @@ class Board extends Component {
   //Function for computer to play against user
 }
 
-export default Board;
+export default Battleship;

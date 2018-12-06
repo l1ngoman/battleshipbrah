@@ -55,3 +55,26 @@
   font-size: 15px;
   word-wrap: normal;
 }
+.T3Box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  font-size: 30px;
+  height: 100px;
+  width: 100px;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 306px;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  padding-top: 150px;
+}

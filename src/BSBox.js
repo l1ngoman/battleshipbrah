@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class Box extends Component {
+class BSBox extends Component {
   constructor(props){
     super(props)
 
@@ -45,4 +45,4 @@ class Box extends Component {
   }
 }
 
-export default Box;
+export default BSBox;

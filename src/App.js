@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Board from './board.js';
+import Battleship from './battleship';
+import TicTacToe from './tictactoe'
 
 
 class App extends Component {
@@ -14,7 +15,8 @@ class App extends Component {
       {
         image: './images/battleship.jpg'
       }],
-      index: 0
+      index: 0,
+      game: 1
     }
   }
 
@@ -33,7 +35,13 @@ class App extends Component {
     return (
       <main>
           <div className="App">
-            <Board gridBoxStyle={style} handleStart={this.handleStart}/>
+          {(() => {
+            switch(this.state.game){
+            case 0: return <h1>Case 0</h1>;
+            case 1: return <Battleship gridBoxStyle={style} handleStart={this.handleStart}/>;
+            case 2: return <TicTacToe />;
+          }
+          })()}
           </div>
       </main>
     );
