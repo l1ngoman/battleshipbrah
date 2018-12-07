@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import T3Box from './T3Box'
+import MessageBoard from './messageboard'
 
 class TicTacToe extends Component {
   constructor(props){
@@ -29,8 +30,11 @@ class TicTacToe extends Component {
     })
 
     return (
-      <div className="board">
-        {boxes}
+      <div id="page">
+        <div className="board">
+          {boxes}
+        </div>
+        <MessageBoard game={2}/>
       </div>
     );
   }
@@ -59,7 +63,7 @@ class TicTacToe extends Component {
     for(let i=0;i<winArr.length;i++) {
       let [a,b,c] = winArr[i]
       if(moves[a] != '' && moves[a] === moves[b] && moves[b] === moves[c]){
-        alert("Winner!");
+        setTimeout(function(){alert(`Player ${moves[a]} won!!`)},50);
         bool = true;
         return bool;
       }else {

@@ -1,57 +1,64 @@
-
-.App {
+main {
+  display: flex;
+  justify-content: center;
   min-height: 100vh;
   width: 100%;
   background-color: white;
 }
 
-.App-logo {
-
-}
-
-.App-header {
-
-}
-
-.App-link {
-}
 #page {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
-#top {
-  display: flex;
-  flex-direction: row;
-  background-image: url(/public/images/topGameBoy.png);
-  background-repeat: no-repeat;
-  background-color: rgba(217,217,217,.89);
-}
-#bottom {
-  background-color: rgba(217,217,217,.89);
-  font-family: 'Chakra Petch', sans-serif;
-  font-size: 14px;
-}
+
 .gameboy {
   display: flex;
-  flex-direction:  row;
+  justify-content: center;
+  flex-wrap: wrap;
   height: 100vh;
-  min-width: 800px;
+  width: 300px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#buttons {
+  background-color: rgba(0,0,0,0);
+  height: 51px;
+  width: 51px;
+  margin-top: 30px;
+  margin-left: 5px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-image: url(/images/buttons.jpeg);
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 125px;
+  width: 500px;
+  font-size: 15px;
+  padding-top: 8px;
+  margin-right: 20px;
 }
 
 .messageBoard {
   font-family: 'Chakra Petch', sans-serif;
   font-size: 40px;
   text-align: center;
-  padding-top: 30px;
-  min-width: 300px;
-  max-width: 500px;
-  height: 100vh;
+  height: 50px;
+  width: 500px;
 }
 
-#ruleTitle{
-  font-size: 25px;
-}
-#ruleList{
+.ruleList{
   font-size: 15px;
   word-wrap: normal;
 }
@@ -60,7 +67,7 @@
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-  font-size: 30px;
+  font-size: 50px;
   height: 100px;
   width: 100px;
 }
@@ -73,8 +80,14 @@
   width: 306px;
 }
 
-.app {
-  display: flex;
-  justify-content: center;
-  padding-top: 150px;
+#radio {
+  position: fixed;
+}
+
+#homePage {
+  background-image: url(/images/homeBackground.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  width: 100vw;
 }

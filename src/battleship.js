@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import BSBox from './BSBox.js'
 import Boat from './Boat.js'
+import MessageBoard from './messageboard.js'
 
 class Battleship extends Component {
   constructor(props){
@@ -22,53 +23,37 @@ class Battleship extends Component {
   }
   render() {
     return (
-      <div id="page">
-        <div id="top">
-                <div className="messageBoard">
-                  Battleship!
-                    <div id="ruleTitle">
-                      Here are z rulez:
-                        <p id="ruleList">
-                          The object of the game is to sink all of your opponent{"\'"}s battleships. There are five ships to sink, but move wisely because you only have {this.state.torpedoCount} torpedos! Good luck, and don{"\'"}t fuck it up!!!
-                        </p>
-                    </div>
-                    <div id="stats">
-                      Torpedos: {this.state.torpedoCount}
-                    </div>
-                </div>
-                <div className="gameboy">
-                    <div className="gridBox" style={this.props.gridBoxStyle}>
-                      {this.state.boxArray}
-                    </div>
-                </div>
+          <div id="page">
+            <div className="gameboy" style={this.props.gridBoxStyle}>
+              {this.state.boxArray}
+            </div>
+            <MessageBoard
+              game={1}
+              torpedoCount={this.state.torpedoCount}
+              startGame={this.startGame}
+              showBoats={this.showBoats}
+              />
+
           </div>
-          <div id="bottom">
-                <div className="button">
-                  <div>
-                    <button onClick={this.showBoats}>SHOW BOATS</button>
-                    <button onClick={this.startGame}>START</button>
-                    <button onClick={this.giveUp}>SURRENDER</button>
-                    <button onClick={this.resetGame}>RESET</button>
-                  </div>
-                </div>
-          </div>
-        </div>
     );
+  }
+
+  componentDidMount() {
+    this.startGame()
   }
 
   handleClickBoard = (bool,boxIndex) => {
     //loading X for hit or O for miss into boardState arr (to determine winner later) and incrementing clickCount and decrementing torpedoCount
-    console.log("handleClickBoard is running");
     let {boardState,clickCount,torpedoCount} = this.state
     clickCount++
     torpedoCount--
     bool ? boardState[boxIndex] = "X" : boardState[boxIndex] = "O";
     //console.log(this.state.boardState); //logs current array of hits and misses
     if(this.isWinner(boardState)){
-      alert("You won, bitch!")
+      setTimeout(function(){alert(`You won!!`)},50);
       this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
     }else if(torpedoCount<=0){
-      alert("You ran out of torpedos, bitch!")
+      setTimeout(function(){alert(`You ran out of torpedos!!!`)},50);
       this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
       this.resetGame();
     }else{
@@ -79,7 +64,16 @@ class Battleship extends Component {
   renderBoxes = () => {
     let boxes = this.state.index.map((box,i) => {
       return(
-        <BSBox id={i} isHit={this.isHit} colors={this.state.colors} handleClickBoard={this.handleClickBoard} winArr={this.state.winArr} resetGame={this.resetGame} boatString={this.boatString} showBoats={this.showBoats}/>
+        <BSBox
+          id={i}
+          isHit={this.isHit}
+          colors={this.state.colors}
+          handleClickBoard={this.handleClickBoard}
+          winArr={this.state.winArr}
+          resetGame={this.resetGame}
+          boatString={this.boatString}
+          showBoats={this.showBoats}
+        />
       )
     })
     return boxes
@@ -176,20 +170,7 @@ class Battleship extends Component {
       console.log("showBoats button disabled");
     }
   }
-  resetGame = () => {
-    !this.state.startButtonOn ? console.log("Trying to reset game") : console.log("resetGame button disabled");
-  }
-  giveUp = () => {
-    !this.state.startButtonOn ? console.log("Trying to surrender") : console.log("surrender button disabled");
-  }
 
-
-
-  //Random numbers can't be the same for different ships
-  //Need to set a state that deactivates the start game button
-  //Need to print out status of ships, ie. sunk vs not sunk
-
-  //Function for computer to play against user
 }
 
 export default Battleship;
