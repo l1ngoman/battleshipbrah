@@ -13,6 +13,12 @@ main {
   align-items: center;
 }
 
+#innerPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .gameboy {
   display: flex;
   justify-content: center;
@@ -50,6 +56,10 @@ main {
   margin-right: 20px;
 }
 
+.iconPic {
+  margin-left: 20px;
+}
+
 .messageBoard {
   font-family: 'Chakra Petch', sans-serif;
   font-size: 40px;
@@ -68,16 +78,36 @@ main {
   align-items: center;
   border: 1px solid black;
   font-size: 50px;
-  height: 100px;
-  width: 100px;
+  height: 110px;
+  width: 110px;
 }
 
-.board {
+.T3Board {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 306px;
+  width: 336px;
+}
+
+.players {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+}
+
+#p1 {
+
+}
+
+#p2 {
+
+}
+
+.T3Emojis {
+  height: 50px;
+  width: 50px;
 }
 
 #radio {
@@ -90,4 +120,40 @@ main {
   background-size: auto;
   background-position: center;
   width: 100vw;
+}
+
+@media only screen and (max-width: 600px) {
+  #page {
+    display: flex;
+    justify-content: top;
+  }
+  .icons {
+    background-image: url(/images/mobileButtons1.jpeg);
+  }
+  #buttons{
+    margin-top: 15px;
+  }
+  .T3Box {
+    height: 100px;
+    width: 100px;
+  }
+  .T3Board {
+    width: 306px;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .icons {
+    background-image: url(/images/mobileButtons2.jpeg);
+    min-height: 94px;
+    min-width: 375px;
+  }
+  .messageBoard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ruleList {
+    width: 300px;
+  }
+
 }

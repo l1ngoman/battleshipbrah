@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import T3Box from './T3Box'
 import MessageBoard from './messageboard'
+import { ButtonToolbar,ToggleButtonGroup,ToggleButton } from 'react-bootstrap';
 
 class TicTacToe extends Component {
   constructor(props){
@@ -20,19 +21,84 @@ class TicTacToe extends Component {
                 [0,4,8],
                 [2,4,6],
               ],
-      winner: false
+      winner: false,
+      version: [
+                ['/images/marvel/ironman.png','/images/marvel/blackpanther.png','/images/marvel/deadpool.png','/images/marvel/rocket.png','/images/marvel/spiderman.png'],
+                ['/images/dc/batman.png','/images/dc/wonderwoman.png','/images/dc/flash.png','/images/dc/aqua.png','/images/dc/cyborg.png']
+              ],
+      selectors: {
+        p1: 0,
+        p2: 0
+      }
     }
   }
   render() {
-    let { boxArr } = this.state
+    let { boxArr,version,moves,selectors } = this.state
     let boxes = boxArr.map((box,i) => {
-      return box = <T3Box key={i} id={i} show={this.state.moves[i]} handleClickParent={this.handleClickParent}/>
+      return box = <T3Box
+                      key={i}
+                      id={i}
+                      bkgd={(() => {
+                        switch(moves[i]){
+                          case 'X': return version[0][selectors.p1];
+                          case 'O': return version[1][selectors.p2];
+                          default: return '';
+                        }
+                      })()}
+                      version={version}
+                      handleClickParent={this.handleClickParent}
+                      />
     })
 
     return (
       <div id="page">
-        <div className="board">
-          {boxes}
+        <div id="innerPage">
+          <ButtonToolbar id="p1" className="players">
+            <h3>Marvel</h3>
+            <ToggleButtonGroup type="radio" name="p1" defaultValue={0}>
+              <ToggleButton value={0} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[0][0]} />
+              </ToggleButton>
+              <ToggleButton value={1} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[0][1]} />
+              </ToggleButton>
+              <ToggleButton value={2} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[0][2]} />
+              </ToggleButton>
+              <ToggleButton value={3} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[0][3]} />
+              </ToggleButton>
+              <ToggleButton value={4} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[0][4]} />
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </ButtonToolbar>
+
+          <div className="T3Board">
+            {boxes}
+          </div>
+
+          <ButtonToolbar id="p2" className="players">
+            <h3>DC</h3>
+            <ToggleButtonGroup type="radio" name="p2" defaultValue={0}>
+              <ToggleButton value={0} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[1][0]} />
+              </ToggleButton>
+              <ToggleButton value={1} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[1][1]} />
+              </ToggleButton>
+              <ToggleButton value={2} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[1][2]} />
+              </ToggleButton>
+              <ToggleButton value={3} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[1][3]} />
+              </ToggleButton>
+              <ToggleButton value={4} onChange={this.toggleEmoji}>
+                <img className="T3Emojis" src={version[1][4]} />
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </ButtonToolbar>
+
         </div>
         <MessageBoard game={2}/>
       </div>
@@ -71,6 +137,14 @@ class TicTacToe extends Component {
       }
     }
     return bool
+  }
+
+  toggleEmoji = (e) => {
+    let { selectors } = this.state
+    console.log("name: "+e.target.name);
+    console.log("value: "+e.target.value);
+    selectors[e.target.name] = e.target.value
+    this.setState({selectors})
   }
 
 }

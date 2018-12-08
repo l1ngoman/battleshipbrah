@@ -30,17 +30,19 @@ class BSBox extends Component {
     //runs on click of square
     //if isClicked is false, it calls the handleClickBoard function and changes color to red if hit or blue if miss
     let {isClicked,colorIndex} = this.state
-    if(!isClicked){
-      let bool = this.props.isHit(this.props.id);
-      if(bool){
-        colorIndex = 1;
-      }else{
-        colorIndex = 2;
-      }
-      isClicked = true;
+    if(!this.props.gameOver){
+      if(!isClicked){
+        let bool = this.props.isHit(this.props.id);
+        if(bool){
+          colorIndex = 1;
+        }else{
+          colorIndex = 2;
+        }
+        isClicked = true;
 
-      this.props.handleClickBoard(bool, this.props.id);
-      this.setState({isClicked: isClicked,colorIndex: colorIndex})
+        this.props.handleClickBoard(bool, this.props.id);
+        this.setState({isClicked: isClicked,colorIndex: colorIndex})
+      }
     }
   }
 }

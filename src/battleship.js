@@ -13,7 +13,9 @@ class Battleship extends Component {
       boxArray: [], //array to hold all box components
       boardState: [], //array containing all hits and misses; parent state variable
       winArr: [], //hold ship coordintes to find winner
+      gameOver: false,
       torpedoCount: 50, //decrements on every legal click
+      clickCount: 0, //increments on every legal click
       colors: ["rgba(125,125,125,0)", "red", "white"],
       startButtonOn: true, //toggles the ability to click either the start or reset buttons
       showBoatsEnabled: false, //toggles the ability to see where enemy ships are
@@ -45,19 +47,36 @@ class Battleship extends Component {
   handleClickBoard = (bool,boxIndex) => {
     //loading X for hit or O for miss into boardState arr (to determine winner later) and incrementing clickCount and decrementing torpedoCount
     let {boardState,clickCount,torpedoCount} = this.state
-    clickCount++
-    torpedoCount--
-    bool ? boardState[boxIndex] = "X" : boardState[boxIndex] = "O";
-    //console.log(this.state.boardState); //logs current array of hits and misses
-    if(this.isWinner(boardState)){
-      setTimeout(function(){alert(`You won!!`)},50);
-      this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
-    }else if(torpedoCount<=0){
-      setTimeout(function(){alert(`You ran out of torpedos!!!`)},50);
-      this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
-      this.resetGame();
-    }else{
-      this.setState({boardState: boardState,clickCount: clickCount,torpedoCount: torpedoCount})
+    if(clickCount >= 0){ //makes game unclickable after win (see line 58)
+      clickCount++
+      torpedoCount--
+      bool ? boardState[boxIndex] = "X" : boardState[boxIndex] = "O";
+      //console.log(this.state.boardState); //logs current array of hits and misses
+      if(this.isWinner(boardState)){
+        setTimeout(function(){alert(`You won!!`)},50);
+        clickCount = -1;
+        this.setState({
+          boardState: boardState,
+          clickCount: clickCount,
+          torpedoCount: torpedoCount,
+          gameOver: true
+        })
+      }else if(torpedoCount<=0){
+        setTimeout(function(){alert(`You ran out of torpedos!!!`)},50);
+        clickCount = -1;
+        this.setState({
+          boardState: boardState,
+          clickCount: clickCount,
+          torpedoCount: torpedoCount,
+          gameOver: true
+        })
+      }else{
+        this.setState({
+          boardState: boardState,
+          clickCount: clickCount,
+          torpedoCount: torpedoCount
+        })
+      }
     }
   }
 
@@ -65,6 +84,7 @@ class Battleship extends Component {
     let boxes = this.state.index.map((box,i) => {
       return(
         <BSBox
+          key={i}
           id={i}
           isHit={this.isHit}
           colors={this.state.colors}
@@ -73,6 +93,7 @@ class Battleship extends Component {
           resetGame={this.resetGame}
           boatString={this.boatString}
           showBoats={this.showBoats}
+          gameOver={this.state.gameOver}
         />
       )
     })
@@ -152,7 +173,11 @@ class Battleship extends Component {
     if(startButtonOn){
       console.log(this.state.winArr);
       boxes = this.renderBoxes();
-      this.setState({winArr: boats.positionShips(),boxArray: boxes,startButtonOn: false})
+      this.setState({
+        winArr: boats.positionShips(),
+        boxArray: boxes,
+        startButtonOn: false
+      })
     }else{
       alert("The game has already started.");
     }

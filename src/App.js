@@ -18,7 +18,7 @@ class App extends Component {
         image: './images/battleship.jpg'
       }],
       index: 0,
-      game: 0
+      game: 0 
     }
   }
 
