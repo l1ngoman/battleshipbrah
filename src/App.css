@@ -126,6 +126,7 @@ main {
   #page {
     display: flex;
     justify-content: top;
+    margin-left: 75px;
   }
   .icons {
     background-image: url(/images/mobileButtons1.jpeg);
@@ -134,11 +135,15 @@ main {
     margin-top: 15px;
   }
   .T3Box {
-    height: 100px;
-    width: 100px;
+    height: 95px;
+    width: 95px;
   }
   .T3Board {
-    width: 306px;
+    width: 291px;
+  }
+  .T3Emojis {
+    height: 35px;
+    width: 35px;
   }
 }
 @media only screen and (max-width: 450px) {

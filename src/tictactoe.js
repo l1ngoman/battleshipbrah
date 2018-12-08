@@ -54,7 +54,7 @@ class TicTacToe extends Component {
       <div id="page">
         <div id="innerPage">
           <ButtonToolbar id="p1" className="players">
-            <h3>Marvel</h3>
+            <img src="/images/marvel/marvelLogo.png" height="50px" width="50px" />
             <ToggleButtonGroup type="radio" name="p1" defaultValue={0}>
               <ToggleButton value={0} onChange={this.toggleEmoji}>
                 <img className="T3Emojis" src={version[0][0]} />
@@ -79,7 +79,7 @@ class TicTacToe extends Component {
           </div>
 
           <ButtonToolbar id="p2" className="players">
-            <h3>DC</h3>
+            <img src="/images/dc/dcLogo.png" height="40px" width="40px" />
             <ToggleButtonGroup type="radio" name="p2" defaultValue={0}>
               <ToggleButton value={0} onChange={this.toggleEmoji}>
                 <img className="T3Emojis" src={version[1][0]} />
