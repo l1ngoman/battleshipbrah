@@ -129,7 +129,9 @@ class TicTacToe extends Component {
     for(let i=0;i<winArr.length;i++) {
       let [a,b,c] = winArr[i]
       if(moves[a] != '' && moves[a] === moves[b] && moves[b] === moves[c]){
-        setTimeout(function(){alert(`Player ${moves[a]} won!!`)},50);
+        let winner;
+        moves[a] === 'X' ? winner = "Marvel" : winner = "DC"
+        setTimeout(function(){alert(`${winner} won!!`)},50);
         bool = true;
         return bool;
       }else {

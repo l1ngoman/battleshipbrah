@@ -6,7 +6,7 @@ class MessageBoard extends Component {
     super(props)
     this.state={
       title: ['Battleship', 'TicTacToe'],
-      rules: ["The object of the game is to sink all of your opponent's battleships. There are five ships to sink, but move wisely because you have limited torpedos! Good luck!!!",
+      rules: ["The object of the game is to sink all of your opponent's battleships. There are five ships to sink (5,4,3,3,2), but move wisely because you have limited torpedos! Good luck!!!",
               "Grab a friend! Use the select button to switch your team! Get three in a row to win!!!"
              ],
       icon: ["./images/torpedoIcon.png","/images/t3Icon.jpg"],
