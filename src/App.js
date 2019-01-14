@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Battleship from './battleship';
-import TicTacToe from './tictactoe';
-import Home from './home';
+import TicTacToe from './t3';
+import Home from './components/home';
 import { ButtonToolbar,ToggleButtonGroup,ToggleButton } from 'react-bootstrap';
 
 

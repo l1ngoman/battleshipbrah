@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 import BSBox from './BSBox.js'
 import Boat from './Boat.js'
-import MessageBoard from './messageboard.js'
+import MessageBoard from '../components/messageboard'
 
 class Battleship extends Component {
   constructor(props){

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import T3Box from './T3Box'
-import MessageBoard from './messageboard'
+import MessageBoard from '../components/messageboard'
 import { ButtonToolbar,ToggleButtonGroup,ToggleButton } from 'react-bootstrap';
 
 class TicTacToe extends Component {
